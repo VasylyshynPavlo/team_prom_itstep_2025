@@ -1,11 +1,49 @@
 {
   "version": 3,
   "targets": {
-    "net9.0": {}
+    "net9.0": {
+      "App.Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/App.Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/App.Core.dll": {}
+        }
+      },
+      "App.Data/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "App.Core": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/App.Data.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/App.Data.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "App.Core/1.0.0": {
+      "type": "project",
+      "path": "../App.Core/App.Core.csproj",
+      "msbuildProject": "../App.Core/App.Core.csproj"
+    },
+    "App.Data/1.0.0": {
+      "type": "project",
+      "path": "../App.Data/App.Data.csproj",
+      "msbuildProject": "../App.Data/App.Data.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net9.0": []
+    "net9.0": [
+      "App.Core >= 1.0.0",
+      "App.Data >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Павло.DESKTOP-1BS6PFI\\.nuget\\packages\\": {},
@@ -14,11 +52,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Павло.DESKTOP-1BS6PFI\\RiderProjects\\team_prom_itstep_2025\\server\\App.Services\\App.Services.csproj",
+      "projectUniqueName": "C:\\Users\\Павло.DESKTOP-1BS6PFI\\Documents\\team_prom_itstep_2025\\server\\App.Services\\App.Services.csproj",
       "projectName": "App.Services",
-      "projectPath": "C:\\Users\\Павло.DESKTOP-1BS6PFI\\RiderProjects\\team_prom_itstep_2025\\server\\App.Services\\App.Services.csproj",
+      "projectPath": "C:\\Users\\Павло.DESKTOP-1BS6PFI\\Documents\\team_prom_itstep_2025\\server\\App.Services\\App.Services.csproj",
       "packagesPath": "C:\\Users\\Павло.DESKTOP-1BS6PFI\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Павло.DESKTOP-1BS6PFI\\RiderProjects\\team_prom_itstep_2025\\server\\App.Services\\obj\\",
+      "outputPath": "C:\\Users\\Павло.DESKTOP-1BS6PFI\\Documents\\team_prom_itstep_2025\\server\\App.Services\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -39,7 +77,14 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Павло.DESKTOP-1BS6PFI\\Documents\\team_prom_itstep_2025\\server\\App.Core\\App.Core.csproj": {
+              "projectPath": "C:\\Users\\Павло.DESKTOP-1BS6PFI\\Documents\\team_prom_itstep_2025\\server\\App.Core\\App.Core.csproj"
+            },
+            "C:\\Users\\Павло.DESKTOP-1BS6PFI\\Documents\\team_prom_itstep_2025\\server\\App.Data\\App.Data.csproj": {
+              "projectPath": "C:\\Users\\Павло.DESKTOP-1BS6PFI\\Documents\\team_prom_itstep_2025\\server\\App.Data\\App.Data.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
