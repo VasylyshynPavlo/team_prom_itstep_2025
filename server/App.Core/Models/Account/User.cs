@@ -16,12 +16,12 @@ public class User
     public bool Blocked { get; set; }
     public string? Avatar { get; set; }
     public char? Sex { get; set; }
-    public DateOnly? Birthday { get; set; }
+    public DateTime? Birthday { get; set; }
     public string? PublicName { get; set; }
     public string? Phone { get; set; }
 
     public User(string username, string hashedPassword, string email, string role, char sex = 'n',
-        DateOnly? birthday = null, string? phone = null, string? avatar = null, 
+        DateTime? birthday = null, string? phone = null, string? avatar = null, 
         string? publicName = null)
     {
         Id = ObjectId.GenerateNewId();

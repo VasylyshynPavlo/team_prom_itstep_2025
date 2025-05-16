@@ -13,20 +13,30 @@ public class AppDbContext
     {
         var client = new MongoClient(settings.Value.ConnectionString);
         _database = client.GetDatabase(settings.Value.DatabaseName);
-
-        CreateIndexes();
     }
     
     public IMongoCollection<User> Users => _database.GetCollection<User>("Users");
 
-    private void CreateIndexes()
+    public async Task CreateIndexesAsync()
     {
-        Users.Indexes.CreateOne(new CreateIndexModel<User>(
-            Builders<User>.IndexKeys.Ascending(u => u.Email),
-            new CreateIndexOptions { Unique = true }));
+        var existingIndexes = await Users.Indexes.ListAsync();
+        var indexes = await existingIndexes.ToListAsync();
 
-        Users.Indexes.CreateOne(new CreateIndexModel<User>(
-            Builders<User>.IndexKeys.Ascending(u => u.Username),
-            new CreateIndexOptions { Unique = true }));
+        bool emailIndexExists = indexes.Any(index => index["name"].AsString == "Email_1");
+        bool usernameIndexExists = indexes.Any(index => index["name"].AsString == "Username_1");
+
+        if (!emailIndexExists)
+        {
+            await Users.Indexes.CreateOneAsync(new CreateIndexModel<User>(
+                Builders<User>.IndexKeys.Ascending(u => u.Email),
+                new CreateIndexOptions { Unique = true }));
+        }
+
+        if (!usernameIndexExists)
+        {
+            await Users.Indexes.CreateOneAsync(new CreateIndexModel<User>(
+                Builders<User>.IndexKeys.Ascending(u => u.Username),
+                new CreateIndexOptions { Unique = true }));
+        }
     }
 }
